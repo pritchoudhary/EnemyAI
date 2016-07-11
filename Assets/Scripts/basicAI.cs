@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
+
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -21,7 +21,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         //Variables for patrolling
         public GameObject[] wayPoints;
-        private int wayPointIndex = 0;
+        private int wayPointIndex;
         public float patrolSpeed = 0.5f;
 
         //Variables for chasing
@@ -36,6 +36,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             agent.updatePosition = true;
             agent.updateRotation = false;
+
+            //initialise waypoint
+            wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
+            wayPointIndex = Random.Range(0, wayPoints.Length);
 
             //Set initial state
             state = basicAI.State.PATROL;
@@ -81,14 +85,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //if too close move to a different way point
             else if(Vector3.Distance(this.transform.position, wayPoints[wayPointIndex].transform.position) <= 2)
             {
-                //increase the counter
-                wayPointIndex += 1;
-
-                // Avoid over running of waypoints
-                if(wayPointIndex > wayPoints.Length)
-                {
-                    wayPointIndex = 0;
-                }
+                wayPointIndex = Random.Range(0, wayPoints.Length);
+                                
             }
 
             else
