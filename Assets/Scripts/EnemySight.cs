@@ -159,8 +159,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             RaycastHit hit;
 
             Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, transform.forward * sightDistance, Color.green);
+
             //45degree angle to the right
             Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized * sightDistance, Color.green);
+
             //45 degree to the left
             Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized * sightDistance, Color.green);
 
